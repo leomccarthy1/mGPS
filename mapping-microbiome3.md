@@ -11,76 +11,16 @@ Load useful packages
 ``` r
 library(sp)
 library(rworldmap)
-```
-
-    ## ### Welcome to rworldmap ###
-
-    ## For a short introduction type :   vignette('rworldmap')
-
-``` r
 library(caret)
-```
-
-    ## Loading required package: lattice
-
-    ## Loading required package: ggplot2
-
-``` r
 library(maps)
 library(MASS)
 library(randomForest)
-```
-
-    ## randomForest 4.6-14
-
-    ## Type rfNews() to see new features/changes/bug fixes.
-
-    ## 
-    ## Attaching package: 'randomForest'
-
-    ## The following object is masked from 'package:ggplot2':
-    ## 
-    ##     margin
-
-``` r
 library(geosphere)
 library(doParallel)
-```
-
-    ## Loading required package: foreach
-
-    ## Loading required package: iterators
-
-    ## Loading required package: parallel
-
-``` r
 library(caret)
 library(plyr)
-```
-
-    ## 
-    ## Attaching package: 'plyr'
-
-    ## The following object is masked from 'package:maps':
-    ## 
-    ##     ozone
-
-``` r
 library(maptools)
-```
-
-    ## Checking rgeos availability: TRUE
-
-``` r
 library(rgeos)
-```
-
-    ## rgeos version: 0.5-2, (SVN revision 621)
-    ##  GEOS runtime version: 3.7.2-CAPI-1.11.2 
-    ##  Linking to sp version: 1.3-1 
-    ##  Polygon checking: TRUE
-
-``` r
 library(mapplots)
 ```
 
