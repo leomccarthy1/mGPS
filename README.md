@@ -9,11 +9,9 @@ This repositry contains all code used for data cleaning, modelling and alaysing/
 
 ..*`mGPS.R` contains terse code for output of predictions given traning and testing bacterial data. 
  
- ..*`trainging` -- bacterial data used to train our model
-  
- ..*`testing` -- bacterial data for which predictions are generated
- 
- ..*`classTarget` -- label for geographic class prediction i.e. continent,country,city etc
+ ..*`trainging` -- bacterial data used to train our model..
+ ..*`testing` -- bacterial data for which predictions are generated..
+ ..*`classTarget` -- label for geographic class prediction i.e. continent,country,city etc..
   
  ..*`vars` -- a vectctor containing names of vartiables to be used as features for preciton. This needs definining even if all            variables are to be used
 
