@@ -1,6 +1,5 @@
 # mapping-bacteria
 Algorithmic approach to mapping environmental samples based on bacterial abundance 
 
-The full matasub data sent can be found in the "data sets" file. The cleaned used for training the full global prediction model
-is titled "global_cleaned.csv"
+This repositry contains all code used for data cleaning, modelling and alaysing/plotting the results contained in the mGPS paper. 
 
