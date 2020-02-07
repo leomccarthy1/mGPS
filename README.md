@@ -7,5 +7,5 @@ This repositry contains all code used for data cleaning, modelling and alaysing/
 
 # Usage 
 
-. g
+. `metasub_global.md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metasub data set. 
 
