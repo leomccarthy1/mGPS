@@ -11,9 +11,16 @@ This repositry contains all code used for data cleaning, modelling and alaysing/
   - `trainging` -- bacterial data used to train our model  
   - `testing` -- bacterial data for which predictions are generated  
   - `classTarget` -- label for geographic class prediction i.e. continent,country,city etc
-  - `vars` -- a vectctor containing names of vartiables to be used as features for preciton. This needs definining even if all            variables are to be used
+  - `vars` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all            variables are to be used
 
-* `metasub_global.md` (and Rmd of the same name) is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metaSub data set. This is definately the best place to start in understanding the modeling workflow used here. 
+* `metasub_global.md` (with Rmd of the same name) is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metaSub data set. This is definately the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing our results
 
-* `soil_global.R` contains code used for 
+
+* `Mplots.R` code used for generating MetaSUB-data plots used in mGPS paper
+
+* `soil_global.R` contains code used for applying our algorithm to soil data, generating (outer) cross validation predictions. 
+
+* `Splots.R` code used for generating soil-data plots used in mGPS paper
+
+
 
