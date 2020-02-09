@@ -11,7 +11,7 @@ This repositry contains all code used for data cleaning, modelling and alaysing/
   - `trainging` -- bacterial data used to train our model  
   - `testing` -- bacterial data for which predictions are generated  
   - `classTarget` -- label for geographic class prediction i.e. continent,country,city etc
-  - `vars` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all            variables are to be used
+  - `variables` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all            variables are to be used
 
 * `metasub_global.md` (with Rmd of the same name) is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metaSub data set. This is definately the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing our results
 
