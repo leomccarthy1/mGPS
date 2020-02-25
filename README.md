@@ -17,12 +17,13 @@ This repositry contains all code used for data cleaning, modelling and results c
 
 * `metasub_global.md` (with Rmd of the same name) is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metaSub data set. This is definately the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing our results
 
-
-* `Mplots.R` code used for generating MetaSUB-data plots used in mGPS paper
-
 * `soil_global.R` contains code used for applying our algorithm to soil data, generating (outer) cross validation predictions. Includes data cleaning and feature selection
 
 * `Splots.R` code used for generating soil-data plots used in mGPS paper
+
+* `Mplots.R` code used for generating global MetaSUB-data plots used in mGPS paper
+
+* `Hong_kong.r` 
 
 
 
