@@ -6,7 +6,7 @@ This repositry contains all code used for data cleaning, modelling and results c
 ## Data
 
 All data required is contained within the `mGPS_Data` folder
-<a id="raw-url" href="https://raw.githubusercontent.com/leomccarthy1/mGPS/DATA/mGPS_data">Download FILE</a>
+<a id="raw-url" href="https://raw.github.com/leomccarthy1/mGPS/DATA/mGPS_data">Download FILE</a>
 [download this](DATA/mGPS_data.zip)
 # Usage 
 
