@@ -1,4 +1,4 @@
-Mapping with microbes, machine learning and XBoost predicts location
+mGPS for MetSUB species data
 ================
 
 This is a comprehensive outline of the main modeling methods used in our
