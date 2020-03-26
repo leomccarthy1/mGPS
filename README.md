@@ -6,7 +6,7 @@ This repositry contains all code used for data cleaning, modelling and results c
 ## Data
 
 All data required is contained within the `mGPS_Data` folder
-
+<a href="myFile.js" download>Click to Download</a> 
 # Usage 
 
 * `mGPS.R` contains code for application of the mGPS algorithm to new data sets, the function takes several arguments:   
