@@ -9,7 +9,7 @@ All data required is contained within the `DATA` folder and can also be download
 <a id="raw-url" href="https://github.com/leomccarthy1/mGPS/blob/master/DATA/mGPS_data.zip?raw=true">Here</a>
 * `Dataset_01_22_2018_enviro.csv` - Soil environmental and geo metadata
 * `Dataset_01_22_2018_taxa.csv` - Soil OTU taxa abundance data
-* `complete_metadata.csv` - MetaSUB enrionnment and geo metadata
+* `complete_metadata.csv` - MetaSUB enrionnmental and geo data
 * `refseq.krakenhll_species.csv` - MetaSUB species abundance data
 * `metasub_data_full.csv` - (cleaned) MetaSUB geo and species data combined by sample ID
 * `metasub_200species.csv` - Optimal 200 species for global MetaSUB predictions
