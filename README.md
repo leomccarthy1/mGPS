@@ -16,7 +16,11 @@ All data required is contained within the `DATA` folder and can also be download
 * `soil_200_OTU.csv` - Optimal 200 OTU taxa for global soil preidctions
 
 
-# Usage 
+## Usage 
+
+* `metasub_global.(R)md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the MetaSUB data set. This is the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing results
+
+* `soil_global.R` contains code used for applying our algorithm to soil data, generating (outer) cross validation predictions. Includes data cleaning and feature selection
 
 * `mGPS.R` contains code for application of the mGPS algorithm to new data sets, the function takes several arguments:   
   - `training` -- bacterial data used to train our model  
@@ -26,9 +30,6 @@ All data required is contained within the `DATA` folder and can also be download
   
   This will return a set of predictions for the specified test data.
 
-* `metasub_global.md` (with Rmd of the same name) is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the metaSub data set. This is definately the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing our results
-
-* `soil_global.R` contains code used for applying our algorithm to soil data, generating (outer) cross validation predictions. Includes data cleaning and feature selection
 
 * `Splots.R` code used for generating soil-data plots used in mGPS paper
 
