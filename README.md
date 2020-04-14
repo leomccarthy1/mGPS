@@ -18,9 +18,9 @@ All data required is contained within the `DATA` folder and can also be download
 
 ## Usage 
 
-* `metasub_global.(R)md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the MetaSUB data set. This is the best place to start in understanding the modeling workflow implemented here and aims to ease the process of reproducing results
+* `metasub_global.(R)md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the MetaSUB data set. This is the best place to start in understanding the modeling workflow implemented here and also contains code for plots for [] manuscript. 
 
-* `soil_global.R` contains code used for applying our algorithm to soil data, generating (outer) cross validation predictions. Includes data cleaning and feature selection
+* `soil_global.R` contains code used for applying algorithm to soil data, generating (outer) cross validation predictions and creating plots for manuscript. Includes data cleaning and feature selection
 
 * `mGPS.R` contains code for application of the mGPS algorithm to new data sets, the function takes several arguments:   
   - `training` -- bacterial data used to train our model  
@@ -29,11 +29,6 @@ All data required is contained within the `DATA` folder and can also be download
   - `variables` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all            variables are to be used
   
   This will return a set of predictions for the specified test data.
-
-
-* `Splots.R` code used for generating soil-data plots used in mGPS paper
-
-* `Mplots.R` code used for generating global MetaSUB-data plots used in mGPS paper
 
 * `Hong_kong.r` 
 
