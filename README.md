@@ -22,13 +22,12 @@ All data required is contained within the `DATA` folder and can also be download
   - `training` -- Taxa data of samples used to train the model. The chaining structure of the model requires that data for taxa abundance, continent, `classTarget` and co-ordinates are provided for each sample. However only abundance data will be used as predictor variables.  
   - `testing` -- taxa abundance data of samples for which predictions are to be generated  
   - `classTarget` -- granularity for geographic class prediction i.e. country,city or trasit station etc. 
-  - `variables` -- a vecttor containing names of species or taca to be used as variables for prediction. This needs definining even if all taxa/species in the training data frame are to be used, so that geographic information are not mistakenly used as predictors. 
+  - `variables` -- a vecttor containing names of species or taca to be used as variables for prediction. This needs definining even if all taxa/species in the training data frame are to be used, so that geographic information are not mistakenly used as predictors. This does however mean that training can take some time and parallisation through the <a id="raw-url" href="https://cran.r-project.org/web/packages/doParallel/doParallel.pdf">doParallel</a> package is recommended. <a id="raw-url" href="https://cran.r-project.org/web/packages/doParallel/doParallel.pdf">doParallel</a>
   
 If no test set is given then a trained model is returned that takes a test set as the input. 
   
 For this implementation of mGPS, hyperparameter tuning is carried out at every level of the chained model using a small grid search applied to the training set provided, the same validation fold splits are used at every level. Predictions are then generated using the test data set provided. This also allows for predictions to be generated using different taxa to the ones used in the mGPS paper. 
-
-
+ 
 * `metasub_global.(R)md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the MetaSUB data set. This is the best place to start in understanding the modeling workflow implemented here and also contains code for plots for [] manuscript. 
 
 * `soil_global.R` contains code used for applying algorithm to soil data, generating (outer) cross validation predictions and creating plots for manuscript. Includes data cleaning and feature selection
