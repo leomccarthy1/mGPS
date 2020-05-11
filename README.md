@@ -32,7 +32,7 @@ If no test set is given then a trained model is returned that takes a test set a
 For this implementation of mGPS, hyperparameter tuning is carried out at every level of the chained model using a small grid search applied to the training set provided, the same validation fold splits are used at every level. Predictions are then generated using the test data set provided. This also allows for predictions to be generated using different taxa to the ones used in the mGPS paper. 
  
  
-## Results and figures
+## Cross validation, results and figures
 * `metasub_figs`
   - `metasub_global.(R)md` is an R notbook explicitly outlining the dat cleansing and generation of results and figures for the mGPS paper. This is the best place to start in understanding the modeling workflow implemented here and also contains code for plots for [Fig1, FigS1, FigS2, FigS3,FigS9, FigS10,] manuscript. 
   - `HK.R` Hong Kong results and figures[Fig2,FigS4]
