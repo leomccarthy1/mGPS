@@ -24,7 +24,7 @@ All data required is contained within the `DATA` folder and can also be download
   - `classTarget` -- granularity for geographic class prediction i.e. country,city or trasit station etc
   - `variables` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all variables are to be used.
   
-  If no training set is given then predictions are generated using our pretrained model. If no test set is given then a trained model is returned that takes a test set as the input. 
+  If no test set is given then a trained model is returned that takes a test set as the input. 
   
   For predictions using a pre-trained model the "trained" folder must be contained in teh working directory.
   
