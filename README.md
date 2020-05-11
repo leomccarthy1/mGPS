@@ -40,7 +40,7 @@ For this implementation of mGPS, hyperparameter tuning is carried out at every l
   - `LDN.R` London results and figures
   - `city_imrprov.R` - Fig S7
 * `soil_biome_figs`
-  - `soil_global.Rmd` Soil microbiome results and figures. [Fig4, FigS8, Fig14,Figs15]
+  - `soil_biome.Rmd` Soil microbiome results and figures. [Fig4, FigS8, Fig14,Figs15]
   
   
 
