@@ -24,7 +24,7 @@ All the geodata required for geographic plots in the mGPS paper.
 * `mGPS.R` Contains code for application of the main mGPS algorithm the function takes several arguments:   
   - `training` -- Taxa data of samples used to train the model. The chaining structure of the model requires that data for taxa abundance, continent, `classTarget` and co-ordinates are provided for each sample. However only abundance data will be used as predictor variables.  
   - `testing` -- taxa abundance data of samples for which predictions are to be generated  
-  - `classTarget` -- granularity for geographic class prediction i.e. country,city or trasit station etc. 
+  - `classTarget` -- granularity for geographic class prediction either country,city or trasit station etc. 
   - `variables` -- a vector containing names of species or taxa to be used as variables for prediction. This needs definining even if all taxa/species in the training data frame are to be used, so that geographic information are not mistakenly used as predictors. This does however mean that training can take some time and parallisation through the <a id="raw-url" href="https://cran.r-project.org/web/packages/doParallel/doParallel.pdf">doParallel</a> package is recommended. 
   
 If no test set is given then a trained model is returned that takes a test set as the input. 
