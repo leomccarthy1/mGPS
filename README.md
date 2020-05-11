@@ -33,11 +33,11 @@ For this implementation of mGPS, hyperparameter tuning is carried out at every l
  
  
 ## Results and figures
-* `metasub_figs`
+*`metasub_figs`
   - `metasub_global.(R)md` is an R notbook explicitly outlining the dat cleansing and generation of results and figures for the mGPS paper. This is the best place to start in understanding the modeling workflow implemented here and also contains code for plots for [Fig1, FigS1, FigS2, FigS3,FigS9, FigS10,] manuscript. 
-  -`HK.R` Hong Kong results and figures[Fig2,FigS4]
-  -`NY.R` New York results and figures [Fig3,FigS5]
-  -`LDN.R` London results and figures
+  - `HK.R` Hong Kong results and figures[Fig2,FigS4]
+  - `NY.R` New York results and figures [Fig3,FigS5]
+  - `LDN.R` London results and figures
   - `city_imrprov.R` - Fig S7
 * `soil_biome_figs`
   - `soil_global.Rmd` Soil microbiome results and figures. [Fig4, FigS8, Fig14,Figs15]
