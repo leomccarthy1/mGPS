@@ -18,19 +18,22 @@ All data required is contained within the `DATA` folder and can also be download
 
 ## Usage 
 
+* `mGPS.R` contains code for application of the main mGPS algorithm the function takes several arguments:   
+  - `training` -- bacterial data used to train our model  
+  - `testing` -- bacterial data for which predictions are generated  
+  - `classTarget` -- granularity for geographic class prediction i.e. country,city or trasit station etc
+  - `variables` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all variables are to be used.
+  
+  If no training set is given then predictions are generated using our pretrained model. If no test set is given then a trained model is returned that takes a test set as the input. 
+  
+  For predictions using a pre-trained model the "trained" folder must be contained in teh working directory.
+  
+  Predictions for the paper were generated using a nested 5-fold corss validation procedure, where hyperparameter tuning was carried out using inner cross validation on each training fold independently. 
+
 * `metasub_global.(R)md` is an R notbook explicitly outlining the steps taken from data cleaning through to the mian modelling process and generating results for predictions on a global scale using the MetaSUB data set. This is the best place to start in understanding the modeling workflow implemented here and also contains code for plots for [] manuscript. 
 
 * `soil_global.R` contains code used for applying algorithm to soil data, generating (outer) cross validation predictions and creating plots for manuscript. Includes data cleaning and feature selection
 
-* `mGPS.R` contains code for application of the mGPS algorithm to new data sets, the function takes several arguments:   
-  - `training` -- bacterial data used to train our model  
-  - `testing` -- bacterial data for which predictions are generated  
-  - `classTarget` -- label for geographic class prediction i.e. continent,country,city etc
-  - `variables` -- a vecttor containing names of vartiables to be used as features for prediction. This needs definining even if all            variables are to be used
-  
-  This will return a set of predictions for the specified test data.
-
-* `Hong_kong.r` 
 
 
 
