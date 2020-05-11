@@ -8,13 +8,12 @@ This repositry contains all code used for data cleaning, modelling and results c
 ### Taxa
 All data required is contained within the `DATA` folder and can also be downloaded
 <a id="raw-url" href="https://github.com/leomccarthy1/mGPS/blob/master/DATA/mGPS_data.zip?raw=true">Here</a>
-* `Dataset_01_22_2018_enviro.csv` - Soil environmental and geo metadata
-* `Dataset_01_22_2018_taxa.csv` - Soil OTU taxa abundance data
+* `Dataset_01_22_2018_enviro.csv` - Soil origin metadata
+* `Dataset_01_22_2018_taxa.csv` - Soil OTU taxa read data
 * `complete_metadata.csv` - MetaSUB enrionnmental and geo data
-* `refseq.krakenhll_species.csv` - MetaSUB species abundance data
-* `metasub_data_full.csv` - (cleaned) MetaSUB geo and species data combined by sample ID
-* `metasub_200species.csv` - Optimal 200 species for global MetaSUB predictions
-* `soil_200_OTU.csv` - Optimal 200 OTU taxa for global soil preidctions
+* `metasub_taxa_abundance.csv` - MetaSUB taxa abundance data
+* `opt_taxa_metasub.csv` - Optimal 200 species for global MetaSUB predictions
+* `opt_taxa_soil.csv` - Optimal 200 OTU taxa for global soil preidctions
 
 ### Geodata 
 All the geodata required for geographic plots in the mGPS paper. 
