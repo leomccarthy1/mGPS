@@ -7,7 +7,7 @@ This repositry contains all code used for data cleaning, modelling and results c
 
 ### Taxa
 All data required is contained within the `DATA` folder and can also be downloaded
-<a id="raw-url" href="https://github.com/leomccarthy1/mGPS/blob/master/DATA/DATA.zip?raw=true">Here</a>
+<a id="raw-url" href="https://www.kaggle.com/tmdb/tmdb-movie-metadata">Here</a>
 * `Dataset_01_22_2018_enviro.csv` - Soil origin metadata
 * `Dataset_01_22_2018_taxa.csv` - Soil OTU taxa read data
 * `complete_metadata.csv` - MetaSUB enrionnmental and geo data
