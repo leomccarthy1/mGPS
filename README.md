@@ -69,6 +69,9 @@ Each data set used in the analysis has its own folder here. Each dataset has a `
 
 Each `make` and `plots` file for the corresponding datasets should be run in turn to reproduce the full analysis. After cloning the repo the `plots` files can be run without first running the corresponding `make` file as the predictions are stored in this repo. 
   
+## Dependencies
+
+Required packages can be found in `packages.r`
   
 
 
