@@ -65,9 +65,9 @@ species_select(x = metasub_data[, taxa],
  
 ## Results and figures
 
-Each data set used in the analysis has its own folder here. Each dataset has a `{dataset}_make.R` file for generating predictions using `mGPS` and cross validation. Also there is a `{dataset}_plots.Rmd` file for each dataset in the analysis which produces plots and tables found in the manuscript.
+Each data set used in the analysis has its own folder here. Each dataset has a `{dataset}_make.R` file for finding Geographically Informative Taxa and generating predictions using `mGPS` and cross validation the results are saved to the corresponding `outputs` folder. There is also a `{dataset}_plots.Rmd` file for each dataset in the analysis which when knit produces plots and tables found in the manuscript.
 
-Each `make` and `plots` file for the corresponding datasets should be run in turn. After cloning the repo the `plots` files can be run without first running the corresponding `make` fiule as the predictions are stored in this repo. 
+Each `make` and `plots` file for the corresponding datasets should be run in turn to reproduce the full analysis. After cloning the repo the `plots` files can be run without first running the corresponding `make` file as the predictions are stored in this repo. 
   
   
 
