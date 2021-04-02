@@ -1,0 +1,229 @@
+---
+title: "mGPS - Soil microbiome results and figures"
+author: Leo McCarthy and Eran Elhaik
+output: github_document
+
+---
+
+Dependencies
+```{r, echo=T, eval = T,message=FALSE}
+library(ggplot2)
+library(sp)
+library(rworldmap)
+library(maps)
+library(geosphere)
+library(caret)
+```
+
+
+
+```{r setup, echo = F}
+### path to mGPS top-level directory here ###
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+knitr::opts_chunk$set(fig.width=13, fig.height=8) 
+```
+Load and combine, soil microbiome taxa and origin metadata
+
+```{r}
+SoilDataPreds <- read.csv('Soil/Outputs/soil_results.csv')
+```
+
+
+## GIT plots
+Plot Fig S14, top 25 geographic indicator species for soil data
+
+```{r}
+#Extract and rank species importance
+v <- read.csv(file = "Soil/Outputs/soil_git.csv")
+top_species <- v[1:25,"taxa"]
+
+
+par(font = 3)
+dotchart(rev(v[1:25,"Overall"])*100,labels= rev(top_species),cex=1.2,pt.cex = 1.3,
+         xlab="Mean decrease in accuracy", mgp = c(2.2,0,0))
+
+```
+
+
+## Map plots
+Plot Fig 4, global soil microbiome predictions. 
+
+```{r}
+palette <-c( "deeppink2","darkorchid4","orangered2","gold2","brown","mediumspringgreen")
+map <- getMap(resolution = "coarse")
+
+plot(map,xlim = c(-160,160), col = "grey", border = "darkgrey", bg = "lightskyblue1", xlab = "", ylab = "")
+title(ylab="Latitude",xlab = "Longitude", mgp=c(2,1,0),cex.lab=1.2)
+for (i in 1:length(levels(SoilDataPreds$continent))){{
+  this_continent <- levels(SoilDataPreds$continent)[i]
+  find_lats <- SoilDataPreds[SoilDataPreds[,"continent"] == this_continent,]$latPred
+  find_longs <- SoilDataPreds[SoilDataPreds[,"continent"] == this_continent,]$longPred
+  points(find_longs, find_lats, col = palette[i], pch = "+", cex = 1.4)
+  }
+legend(-160,0,legend=c("Africa", "Asia", "Oceania", "Europe", "North America","South America"),
+         col=palette,pch = "+",cex=1.4, bg = "lightskyblue1")  
+}
+map.axes()
+
+```
+
+
+
+Find the distance from country of origin for each sample. Put into data frame for plotting. 
+```{r}
+SoilDataPreds$GPSassign <- map.where(database = "world", SoilDataPreds$longPred, SoilDataPreds$latPred)
+SoilDataPreds[is.na(SoilDataPreds$GPSassign),"GPSassign"] <- "In_sea"
+
+for (i in 1:length((SoilDataPreds$country))){ 
+  country_lats <- map(database ="world",regions = SoilDataPreds[i,"country"], plot = FALSE)$y
+  country_longs <- map(database ="world",regions = SoilDataPreds[i,"country"], plot = FALSE)$x
+  pred_lat <- SoilDataPreds[i,]$latPred
+  pred_long  <- SoilDataPreds[i,]$longPred
+  distance <- c()
+  if(SoilDataPreds[i,]$GPSassign == SoilDataPreds[i,]$country){
+    SoilDataPreds[i,"distance_from_country"] <- 0
+  } else{
+    for (n in 1:length(country_lats)){
+      distance[n] <- distHaversine(c(pred_long ,pred_lat ),c(country_longs[n],country_lats[n]))/1000
+      
+    }
+    SoilDataPreds[i,"distance_from_country"] <- min(distance, na.rm = TRUE)
+  }
+}
+
+c <- confusionMatrix(SoilDataPreds$countryPred
+                ,SoilDataPreds$country)
+
+#Print results
+
+print( paste("Prediciton Accuracy = ",mean(SoilDataPreds$countryPred ==SoilDataPreds$country),
+       "Mean Sensitivity = ", mean(c[[4]][,"Sensitivity"]),
+       "Proportion of samples within 100km of origin = ", mean(SoilDataPreds$distance_from_country < 100)))
+
+
+bar_df <- data.frame(row.names = c( "Overall",levels(SoilDataPreds$country)))
+
+for (i in 1: length(levels(SoilDataPreds$country))){
+  overall_prop <- mean(SoilDataPreds[,"distance_from_country"] < 500)
+  bar_df[1,"0 - 500km"] <- overall_prop
+  
+  this_country <- levels(SoilDataPreds$country)[i]
+  prop <- mean(SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] < 500)
+  bar_df[i+1,"0 - 500km"] <- prop
+}
+
+for (i in 1: length(levels(SoilDataPreds$country))){
+  this_country <- levels(SoilDataPreds$country)[i]
+  prop <- mean(SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] > 500 & SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] < 1000)
+  bar_df[i+1,"500 - 1000km"] <- prop
+  
+  overall_prop <- mean(SoilDataPreds[,"distance_from_country"] > 500 & SoilDataPreds[,"distance_from_country"] < 1000)
+  bar_df[ 1,"500 - 1000km"] <- overall_prop
+}
+
+for (i in 1: length(levels(SoilDataPreds$country))){
+  this_country<- levels(SoilDataPreds$country)[i]
+  prop <- mean(SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] > 1000 & SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] < 2000)
+  bar_df[i+1,"1000 - 2000km"] <- prop
+  
+  overall_prop <- mean(SoilDataPreds[,"distance_from_country"] > 1000 & SoilDataPreds[,"distance_from_country"] < 2000)
+  bar_df[ 1,"1000 - 2000km"] <- overall_prop
+}
+for (i in 1: length(levels(SoilDataPreds$country))){
+  this_country <- levels(SoilDataPreds$country)[i]
+  prop <- mean(SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] > 2000 & SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] < 3000)
+  bar_df[i+1,"2000 - 3000km"] <- prop
+  
+  overall_prop <- mean(SoilDataPreds[,"distance_from_country"] > 2000 & SoilDataPreds[,"distance_from_country"] < 3000)
+  bar_df[ 1,"2000 - 3000km"] <- overall_prop
+}
+for (i in 1: length(levels(SoilDataPreds$country))){
+  this_country <- levels(SoilDataPreds$country)[i]
+  prop <- mean(SoilDataPreds[SoilDataPreds$country == this_country,][,"distance_from_country"] > 3000 )
+  bar_df[i+1,"> 3000km"] <- prop
+  
+  overall_prop <- mean(SoilDataPreds[,"distance_from_country"] > 3000)
+  bar_df[ 1,"> 3000km"] <- overall_prop
+}
+size1 <- c()
+for (i in 1: length(levels(SoilDataPreds$country))){
+  
+  this_country <- levels(SoilDataPreds$country)[i]
+  size1[i] <- length(which(SoilDataPreds$country == this_country))
+}
+
+
+```
+
+
+Plot Fig S8, distance from country of origin barplot
+
+```{r}
+par(xpd = T, mar = par()$mar + c(1,0,0,7), mgp = c(0,0.7,0), las=2)
+bp <- barplot(t(bar_df*100), col=c("slategray1","lightblue", "skyblue", "royalblue3", "darkblue"), 
+              names.arg=c("Overall",paste0(levels(SoilDataPreds$country),"  (",size1,")")) ,
+              args.legend = list(x = "topright", inset=c(-0.5,0)), las =2, 
+              cex.names=.6,ylab = "", axisnames = F,axes = F, space =0)
+
+axis(side =2, pos = 0)
+mtext(text = c("Overall",paste0(levels(SoilDataPreds$country),"  (",size1,")")) , side = 1, at = bp, line = 0, padj = 1, cex = 0.7)
+title(ylab="Proportion of sample predictions %", mgp=c(0,0,0),cex.lab=1)
+legend("topright",inset = c(-0.1,0.4), rev(c(colnames(bar_df))), fill = rev(c("slategray1","lightblue", "skyblue", "royalblue3", "darkblue")) , bty = 1, cex = 0.8)
+```
+
+
+
+Fig S15, plots of abundance geo distribution for 25 geographic indicator species. These plots will be saved to `Soil/Outputs`. 
+
+```{r, echo = FALSE, messages = F}
+ag <- aggregate(SoilDataPreds[,as.character(top_species)], by = list(SoilDataPreds$country), FUN = median)
+country_locations <- aggregate(SoilDataPreds[,c("longitude","latitude")], by = list(SoilDataPreds$country), FUN = mean)
+country_abund <- merge(country_locations,ag, by = "Group.1")
+
+for (i in top_species){
+  if (max(country_abund[,i]) == 0 ){country_abund[,i] <- 0} 
+  else{ country_abund[,i] <- (country_abund[,i]- min(country_abund[,i]) )/(max(country_abund[,i])- min(country_abund[,i]))
+  }
+}
+
+pal <- palette <-c( "gold2","brown","dodgerblue3","darkseagreen2","darkorchid4","darkcyan","orangered2","olivedrab2","deeppink2","darkslateblue","mediumspringgreen","gray21","royalblue","yellow1","orange","purple1","cyan2","burlywood","aquamarine2","chartreuse4","deeppink4","cadetblue4","goldenrod1","firebrick2","hotpink")
+for (p in 1:25){
+  
+  
+  #png(paste("Species_abundance_",p,".png", sep = ""), width = 12, height = 8, units = "in", res = 600)
+  
+  ggplot(map, aes(x = long, y = lat, group = group)) +
+    geom_polygon(fill="grey", colour = "darkgrey", size = 0.4)+
+    coord_quickmap(xlim = c(-145,165), ylim =c(-50,70))+
+    theme_classic()+
+    theme(panel.background = element_rect(fill = "lightskyblue1",
+                                          colour = "lightskyblue1",
+                                          size = 0.5, linetype = "solid"))+
+    geom_point(data = country_abund , aes(x = longitude,y = latitude, 
+                                      group = Group.1, color = country_abund[,p+3]), size = 9)+
+    
+    scale_color_gradient(low = "white", high = pal[p], na.value = NA,name = "Relative abundance \n(normalised)", limits = c(0,1), breaks = waiver(),n.breaks = 6)+
+    
+    
+    theme(legend.position = c(0.08, 0.3),
+          legend.background = element_rect(fill="lightskyblue1", 
+                                           size=2, linetype="solid"),legend.key.size = unit(0.9, "cm"), 
+          legend.text = element_text(size = 9, face = "bold"), 
+          legend.title = element_text(size = 12, face = "bold"),
+          plot.title = element_text(size = 18, face = "bold"),
+          axis.line=element_blank(),axis.text.x=element_blank(),
+          axis.text.y=element_blank(),axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          plot.margin = unit( c(t = 0, r = -.1, b = -.2, l = 0), "cm"))+
+    ggtitle(colnames(country_abund )[p+3],)+
+    labs(x="", y="")
+  
+  ggsave(paste("Species_abundance_soil_",p,".png", sep = ""),plot = last_plot(),device = NULL,path = "Soil/Outputs/",scale = 1,width = 12,height = 5.1,dpi = 600,limitsize = TRUE,)
+  
+  
+}
+
+```
+
+

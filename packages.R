@@ -1,0 +1,10 @@
+install.packages('caret')
+install.packages('scone')
+install.packages('maps')
+install.packages('sp')
+install.packages('xgboost')
+install.packages('rworldmap')
+install.packages('rgdal')
+install.packages('geosphere')
+install.packages('maptools')
+

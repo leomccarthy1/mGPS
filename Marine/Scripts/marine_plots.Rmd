@@ -1,0 +1,68 @@
+---
+title: "mGPS - Marine microbiome results and figures"
+author: "Leo McCarthy and Eran Elhaik"
+output: 
+  github_document
+---
+
+```{r setup, echo = F}
+### path to mGPS top-level directory here ###
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+knitr::opts_chunk$set(fig.width=13, fig.height=8) 
+```
+
+
+```{r, message = F}
+library(rworldmap)
+```
+
+### Load marine mGPS predictions generated in `marine_make.R` using 5-fold CV with. Find the median distance from origin. 
+```{r}
+marine_preds <- read.csv("Marine/Outputs/marine_results.csv")
+
+for (i in 1:nrow(marine_preds)){
+  marine_preds[i,"Distance_from_origin"] <- geosphere::distm(c(marine_preds[i,"longPred"],marine_preds[i,"latPred"]), 
+                                                                  c(marine_preds[i,"longitude"],marine_preds[i,"latitude"]), 
+                                                                  fun = geosphere::distHaversine)/1000
+}
+
+print(paste("Median distance from origin = ", median(marine_preds$Distance_from_origin)))
+```
+
+### Plot predicted locations for all samples coloured by sea of origin.
+```{r, message = F}
+#Plots
+seas <- rgdal::readOGR(dsn = "Data/Geo/ne_10m_geography_marine_polys", layer = "ne_10m_geography_marine_polys", verbose = F)
+seas[which(seas$name== "Sargasso Sea"),'name'] = "North Atlantic Ocean"
+labs <-  c("Arabian Sea","Indian Ocean","Mediterranean Sea","Mozambique Channel","North Atlantic Ocean","North Pacific Ocean","Red Sea","South Atlantic Ocean","South Pacific Ocean")
+
+map <- rworldmap::getMap(resolution = "coarse")
+
+palette <-c( "deeppink","darkorchid4","cyan","gold2","orangered2","mediumspringgreen","darkgreen","blue","black")
+
+#png("Marine/Outputs/marine_plot.png", width = 13,height = 8, units = 'in', res = 300)
+plot(map,xlim = c(-135,120),ylim = c(-50,70), col = "lightgray", border = "darkgrey", xlab = "", ylab = "")
+title(ylab="Latitude",xlab = "Longitude", mgp=c(2,1,0),cex.lab=1.2)
+for (i in 1:length(levels(factor(marine_preds$Sea)))){
+  this_sea <- levels(factor(marine_preds$Sea))[i]
+  
+  plot(seas[make.names(seas$name) == this_sea,], add = TRUE, col = scales::alpha(palette[i], 0.5),xlim = c(-160,120), border = NA)
+}
+for (i in 1:length(levels(factor(marine_preds$Sea)))){{
+  this_sea <- levels(factor(marine_preds$Sea))[i]
+  
+  #plot(seas[make.names(seas$name) == this_sea,], add = TRUE, col = alpha(palette[i], 0.5),xlim = c(-160,160), border = "lightgray")
+  
+
+  find_lats <- marine_preds[marine_preds[,"Sea"] == this_sea,]$latPred
+  find_longs <- marine_preds[marine_preds[,"Sea"] == this_sea,]$longPred
+  points(find_longs, find_lats, pch = "+", cex = 1.5,col=palette[i])
+}
+  legend(70,70,legend= labs,
+         col=palette,pch = "+",cex=1)   
+   
+}
+maps::map.axes()
+#dev.off()
+```
+
