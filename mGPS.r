@@ -155,8 +155,7 @@ mGPS <-
                             method = "xgbTree",
                             trControl = trControl,
                             tuneGrid = tune_grid,
-                            nthread = nthread,
-                            objective = "reg:squarederror")
+                            nthread = nthread)
       
       l3_train <- data.frame(l2_train, "latPred" = Xgb_latitude[["pred"]][order(Xgb_latitude$pred$rowIndex),"pred" ])
       
@@ -164,8 +163,7 @@ mGPS <-
                              method = "xgbTree",
                              trControl = trControl,
                              tuneGrid = tune_grid,
-                             nthread = nthread,
-                             objective = "reg:squarederror")
+                             nthread = nthread)
       
     }
     #check for test set, return trained model if no test set. 
