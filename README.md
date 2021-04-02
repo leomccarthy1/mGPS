@@ -34,6 +34,7 @@ If no test set is given then a trained model is returned that takes a test set a
   
 For this implementation of mGPS, hyperparameter tuning is carried out at every level of the chained model using a small grid search applied to the training set provided, the same validation fold splits are used at every level. Predictions are then generated using the test data set provided. 
 
+Example
 ```R
 mGPS(training = train, 
      testing = test, 
@@ -51,6 +52,7 @@ mGPS(training = train,
   - `subsets` -- The variable subset sizes to try 
   - `cores` -- number of cores to utilise 
 
+Example
 ```R
 species_select(x = metasub_data[, taxa],
                y = metasub_data$city,
