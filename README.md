@@ -26,7 +26,7 @@ All dat and geodata required to reproduce the analysis is contained within the `
   - `testing` -- taxa abundance data of samples for which predictions are to be generated  
   - `classTarget` -- granularity for geographic class prediction either country,city or trasit station etc. 
   - `variables` -- a vector containing names of species or taxa to be used as variables for prediction. This needs definining even if all taxa/species in the training data frame are to be used, so that geographic information are not mistakenly used as predictors. 
-  - `hierarchy` -- The geographic hierarchy for predictions i.e. c('continent','city','latitude','longitude')
+  - `hierarchy` -- The geographic hierarchy for predictions i.e. continent –> city -> latitude -> longitude
   - `nthread` -- number of threads to utilise 
   - `coast` -- (optional) data.frame of co-ordinates for predictions to be bound by
   
